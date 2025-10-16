@@ -1,0 +1,66 @@
+{
+  "name": "video-convert-to-mp4",
+  "version": "1.0.0",
+  "main": "main.js",
+  "description": "A video conversion tool built with Electron",
+  "author": "Trio",
+  "scripts": {
+    "start": "electron .",
+    "build:dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "dist:mac": "npm run build && npx electron-builder --mac --x64",
+    "dist:win": "npm run build && npx electron-builder --win --x64"
+  },
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.20",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
+    "babel-loader": "^9.2.1",
+    "electron": "^26.0.0",
+    "electron-devtools-installer": "^4.0.0",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "electron-builder": "^24.10.0"
+  },
+  "build": {
+    "appId": "com.trio.videoconvert",
+    "productName": "VideoConvertToMP4",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.js",
+      "index.html",
+      "preload.cjs",
+      "dist/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "node_modules/ffmpeg-static/ffmpeg",
+        "to": "ffmpeg"
+      }
+    ],
+    "mac": {
+      "target": [
+        {
+          "target": "zip",
+          "arch": [ "x64" ]
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "zip",
+          "arch": [ "x64" ]
+        }
+      ]
+    }
+  }
+}
